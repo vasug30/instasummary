@@ -1,0 +1,106 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% extends "header.html" %}
+
+{% block content %}
+    {% include 'snippets/nav.html' %}
+
+      	<main>
+      	<br> <br><br>
+
+      	 	<div class="container">
+	    		<div class="row">
+                    <form method="POST">
+		            {% csrf_token %}
+		    		<div class="col s12 m12 l6 offset-l3" id="card-panel">
+			          <div class="card blue-grey lighten-5" style="margin-top:-40px;">
+			            <div class="card-content black-text">
+                            {% load staticfiles %}
+			            	<center><img src="/static/images/logo1.png" style="height: 150px; width: 150px; margin-top: -20px; margin-bottom: -50px" /><img src="/static/images/instabanner.png" height="100px" width="100%"/></center>
+			            	<br>
+
+
+				    	  <input type='text' placeholder='&#xf02b; Enter KeyWord Here' style="background: white;  padding-left:10px; margin-top:-15px" id="keyword" name="keyword"/>
+
+							<label>Number of sites you want to crawl</label><br>
+
+
+
+							<select class="browser-default" name="max_url">
+							  <option value="" disabled selected>Select</option>
+							  <option value="1">1</option>
+							  <option value="2">2</option>
+							  <option value="3">3</option>
+							  <option value="4">4</option>
+							  <option value="5">5</option>
+							  <option value="6">6</option>
+							  <option value="7">7</option>
+							  <option value="8">8</option>
+								<option value="9">9</option>
+							  <option value="10" selected>10</option>
+							</select>
+							</div>
+
+							<br>
+			            <center><button class="btn waves-effect  light-blue darken-1" type="submit" id="submit" name="action" style="margin-top:0px">Search
+							    <!-- <i class="material-icons right">send</i> -->
+							</button></center>
+							<br><br>
+
+			            </div>
+
+			        </div>
+			    </form>
+                </div>
+
+	    		</div>
+	      	</div>
+		</main>
+
+
+
+            {% if error1 %}
+                <script>
+                        alert("No Links Found !!");
+                        $('#keyword').parent().after("<p  style='color:green;font-size: medium;display:inline-block ;margin-top:-200px;margin-left:170px'><b> No Links Are Found.</b></p>");
+                        $('p').fadeOut(10000);
+
+                </script>
+            {% endif %}
+
+
+            {% if error %}
+                <script>
+                        alert("Max 10 words Are Allowed");
+                        $('#keyword').parent().after("<p  style='color:green;font-size: medium;display:inline-block ;margin-top:-200px;margin-left:130px'><b><center> Max 10 Words Are Allowed.</center></b></p>");
+                        $('p').fadeOut(10000);
+
+                </script>
+            {% endif %}
+
+            {% if objects %}
+            <center>
+            <div style="width:50%; background:white; border-radius:5px">
+
+                {% for obj in objects %}
+
+                    <ul>
+                        <br><li> {{ obj }} </li><br>
+                    </ul>
+
+                {% endfor %}
+
+            </div>
+            </center>
+            {% endif %}
+
+
+{% include 'snippets/footer.html' %}
+
+
+
+{% endblock content %}
+
+
+
+
+

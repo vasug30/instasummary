@@ -1,0 +1,91 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% extends "header.html" %}
+
+{% block content %}
+    {% include 'snippets/nav.html' %}
+
+      	<main>
+      	<br> <br>
+
+      	 	<div class="container">
+	    		<div class="row">
+                    <form method="POST">
+		            {% csrf_token %}
+		    		<div class="col s12 m12 l6 offset-l3" id="card-panel">
+			          <div class="card blue-grey lighten-5" >
+			            <div class="card-content black-text">
+			            	{% load staticfiles %}
+			            	<center><img src="/static/images/logo1.png" style="height: 150px; width: 150px; margin-top: -20px; margin-bottom: -50px" /><img src="/static/images/instabanner.png" height="100px" width="100%"/></center>
+			            	<br>
+
+
+				    	  <input type='text' placeholder='&#xf02b; Enter URL Here' style="background: white;  padding-left:10px;" name="url" id="link_name"></input>
+
+			            </div>
+			            <br>
+
+						  <center><a target="_blank"><button class="btn waves-effect  light-blue darken-1" type="submit">Search</button></a></center>
+
+
+							<br><br>
+
+			        </div>
+			    </div>
+
+	    	</form>	</div>
+	      	</div>
+		</main>
+
+
+{% if error2 %}
+    <script>
+            //alert("Invalid File");
+            $('#link_name').parent().after("<p  style='color:red;font-size: medium;display:inline-block ;margin-top:-200px;margin-left:90px'><b> Summarize for Given Url is Not Possible.</b></p>");
+            $('p').fadeOut(10000);
+
+    </script>
+{% endif %}
+{% if error1 %}
+    <script>
+            //alert("Invalid File");
+            $('#link_name').parent().after("<p  style='color:red;font-size: medium;display:inline-block ;margin-top:-200px;margin-left:90px'><b> Summarize for Given Url is Not Possible.</b></p>");
+            $('p').fadeOut(10000);
+
+    </script>
+{% endif %}
+
+{% if error %}
+    <script>
+            //alert("Invalid File");
+            $('#link_name').parent().after("<p  style='color:red;font-size: medium;display:inline-block ;margin-top:-200px;margin-left:175px'><b> Enter Valid Url.</b></p>");
+            $('p').fadeOut(10000);
+
+    </script>
+{% endif %}
+
+
+{% if url %}
+
+            <center>
+            <div style="width:50%; background:white; border-radius:5px">
+	            {{ url }}
+            </div>
+            </center>
+
+
+{% endif %}
+
+
+
+    {% include 'snippets/footer.html' %}
+    {% load staticfiles %}
+
+
+
+
+{% endblock content %}
+
+
+
+
+

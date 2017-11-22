@@ -1,0 +1,43 @@
+
+
+//angular code
+.controller("homeController",function($scope,$http)
+{
+	var parameters = {
+				        "password": "1234",
+				        "username": "het"
+				    };
+	$http({
+		method: "POST",
+		url: "http://localhost/myproject/form_handling.php",
+		params: parameters
+		}).then(function(response){
+			var data = response.data;
+			$scope.message = data.message;
+		},
+		function(reason){
+			$scope.status = reason.status;
+			$scope.reason = reason.statusText;
+		});
+}
+
+//php code
+
+include('connection.php');
+$uname = $_GET['username'];
+$pass = $_GET['password'];
+$password = md5($pass);
+	
+$sql = "SELECT * FROM `users_master` WHERE `username` = '".$uname."'";
+$result = mysqli_query($connection, $sql);
+$data =  mysqli_fetch_array($result,MYSQLI_BOTH);
+
+if($data['password']==$password)
+{	
+	$response['message'] = "Login Sucessful!";
+}
+else
+{
+	$response['message'] = "Incorrect Email OR Password!";
+}
+echo json_encode($response);

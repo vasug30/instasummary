@@ -1,0 +1,40 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% extends "header.html" %}
+
+{% block content %}
+{% include 'snippets/nav.html' %}
+
+
+{% if keyword %}
+
+ <center>
+            <div style="width:50%; background:white; border-radius:5px">
+
+                {% for obj in keyword %}
+
+                    <ul>
+                        <br><li> {{ obj }} </li><br>
+                    </ul>
+
+                {% endfor %}
+
+            </div>
+ </center>
+
+{% endif %}
+
+
+<center>
+    <div style="width:50%; background:white; border-radius:5px; margin-top:50px; margin-bottom:50px">
+
+        {{ summ }}
+
+    </div>
+</center>
+
+
+
+
+{% include 'snippets/footer.html' %}
+{% load staticfiles %}
+{% endblock content %}
