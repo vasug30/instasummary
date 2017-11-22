@@ -54,7 +54,7 @@ def home(request):
                     return render(request, "home.html", context)
 
             def get_output(singleurl):
-                url = 'http://127.0.0.1:8000/summarizer/'
+                url = 'http://18.220.110.217:8000/summarizer/'
                 # params = {'url': singleurl}
                 r = requests.post(url, data={'url' : singleurl})
                 out = r.json()
@@ -148,7 +148,7 @@ def keyword(request):
         length = len(queue)-1
         for i in range(length):
             def get_output(singleurl):
-                url = 'http://127.0.0.1:8000/summarizer/'
+                url = 'http://18.220.110.217:8000/summarizer/'
                 # params = {'url': singleurl}
                 r = requests.post(url, data={'url' : singleurl})
                 out = r.json()
@@ -219,7 +219,7 @@ def fileupload(request):
             text = '\n'.join(fullText)
 
         def get_output(text):
-            url = 'http://127.0.0.1:8000/pdfsummary/'
+            url = 'http://18.220.110.217:8000/pdfsummary/'
             r = requests.post(url, data={'text': text})
             out = r.json()
             for key, value in out.items():
